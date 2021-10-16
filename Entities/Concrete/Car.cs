@@ -15,6 +15,7 @@ namespace Entities.Concrete
 
         public int ColorId { get; set; }
 
+        public string Name { get; set; }
         public int ModelYear { get; set; }
 
         public int DailyPrice { get; set; }
@@ -23,7 +24,7 @@ namespace Entities.Concrete
         override
         public string ToString()
         {
-            return "[id=" + this.Id + " BrandId=" + BrandId + " ColorId=" + ColorId + " ModelYear=" + ModelYear + " Daily Price=" + DailyPrice + " Description=" + Description + " ]";
+            return "[id=" + this.Id + " BrandId=" + BrandId + " ColorId=" + ColorId +" Name:"+ Name + " ModelYear=" + ModelYear + " Daily Price=" + DailyPrice + " Description=" + Description + " ]";
         }
 
     }
