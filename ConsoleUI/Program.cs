@@ -6,6 +6,8 @@ using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using Entities.DTOs;
 
 namespace ConsoleUI
 {
@@ -14,25 +16,62 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             // Create Variables
-            ICarDal EfCarDal = new EfCarDal();
-            ICarService carManager = new CarManager(EfCarDal);
+            ICarDal efCarDal = new EfCarDal();
+            ICarService carManager = new CarManager(efCarDal);
 
-            //Car testCar = new Car { Id = 1, Name = "Astra", BrandId =1, ColorId=1, DailyPrice=100, Description="test car ", ModelYear=2002 };
+            IColorDal efColorDal = new EfColorDal();
+            IColorService colorManager = new ColorManager(efColorDal);
+
+            IBrandDal efBrandDal = new EfBrandDal();
+            IBrandService brandManager = new BrandManager(efBrandDal);
+
+
+            Car testCar = new Car { Id = 1, Name = "Astra", BrandId =1, ColorId=1, DailyPrice=100, Description="test car ", ModelYear=2002 };
+            //Color testColor = new Color { Id = 1, Name = "Red" };
+            //Brand testBrand = new Brand { Id = 1, Name = "Opel" };
 
             //carManager.Add(testCar);
+            //colorManager.Add(testColor);
+            //brandManager.Add(testBrand);
 
-            List<Car> carList = carManager.GetAll();
-            printCars(carList);
+            List<CarDetailDto> carDetails = carManager.GetCarDetails();
 
-          
-
-        }
-        // Print all cars
-        static void printCars(List<Car> cars)
-        {
-            foreach (Car tempCar in cars)
+            foreach (var carDetail in carDetails)
             {
-                Console.WriteLine(tempCar.ToString());
+                Console.WriteLine("[ CarName: "+ carDetail.CarName +"| BrandName:"+carDetail.BrandName +"| ColorName: "+ carDetail.ColorName +"| DailyPrice:"+carDetail.DailyPrice + " ]");
+
+            }
+            //printColors(colorManager);
+            //printBrands(brandManager);
+        }
+
+        private static void printBrands(IBrandService brandManager)
+        {
+            List<Brand> brands = brandManager.GetAll();
+
+            foreach (var brand in brands)
+            {
+                Console.WriteLine("[ Id:" + brand.Id + " | Name:" + brand.Name + " ]");
+
+            }
+        }
+
+        private static void printColors(IColorService colorManager)
+        {
+            List<Color> colors = colorManager.GetAll();
+
+            foreach (var color in colors)
+            {
+                Console.WriteLine("[ Id:" + color.Id + "Name: " + color.Name + " ]");
+            }
+        }
+
+        // Print List Objects
+        static void printList<T>(List<T> objects)
+        {
+            foreach (var tempObj in objects)
+            {
+                Console.WriteLine(tempObj.ToString());
             }
             Console.WriteLine();
         }
