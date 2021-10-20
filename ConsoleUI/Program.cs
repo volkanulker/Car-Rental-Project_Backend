@@ -26,7 +26,7 @@ namespace ConsoleUI
             IBrandService brandManager = new BrandManager(efBrandDal);
 
 
-            Car testCar = new Car { Id = 1, Name = "Astra", BrandId =1, ColorId=1, DailyPrice=100, Description="test car ", ModelYear=2002 };
+            //Car testCar = new Car { Id = 1, Name = "Astra", BrandId = 1, ColorId = 1, DailyPrice = 100, Description = "test car ", ModelYear = 2002 };
             //Color testColor = new Color { Id = 1, Name = "Red" };
             //Brand testBrand = new Brand { Id = 1, Name = "Opel" };
 
@@ -34,15 +34,24 @@ namespace ConsoleUI
             //colorManager.Add(testColor);
             //brandManager.Add(testBrand);
 
+            //CarDetailDtoTest(carManager);
+
+            //printColors(colorManager);
+            //printBrands(brandManager);
+
+
+         
+        }
+
+        private static void CarDetailDtoTest(ICarService carManager)
+        {
             List<CarDetailDto> carDetails = carManager.GetCarDetails();
 
             foreach (var carDetail in carDetails)
             {
-                Console.WriteLine("[ CarName: "+ carDetail.CarName +"| BrandName:"+carDetail.BrandName +"| ColorName: "+ carDetail.ColorName +"| DailyPrice:"+carDetail.DailyPrice + " ]");
+                Console.WriteLine("[ CarName: " + carDetail.CarName + "| BrandName:" + carDetail.BrandName + "| ColorName: " + carDetail.ColorName + "| DailyPrice:" + carDetail.DailyPrice + " ]");
 
             }
-            //printColors(colorManager);
-            //printBrands(brandManager);
         }
 
         private static void printBrands(IBrandService brandManager)
