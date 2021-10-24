@@ -25,11 +25,28 @@ namespace ConsoleUI
             IBrandDal efBrandDal = new EfBrandDal();
             IBrandService brandManager = new BrandManager(efBrandDal);
 
+            ICustomerDal customerDal = new EfCustomerDal();
+            ICustomerService customerManager = new CustomerManager(customerDal);
 
-            //Car testCar = new Car { Id = 1, Name = "Astra", BrandId = 1, ColorId = 1, DailyPrice = 100, Description = "test car ", ModelYear = 2002 };
-            //Color testColor = new Color { Id = 1, Name = "Red" };
-            //Brand testBrand = new Brand { Id = 1, Name = "Opel" };
+            
+            IUserDal userDal = new EfUserDal();
+            IUserService userManager = new UserManager(userDal);
 
+            IRentalDal rentalDal = new EfRentalDal();
+            IRentalService rentalManager = new RentalManager(rentalDal);
+
+
+            //Car testCar = new Car { Name = "Astra", BrandId = 1, ColorId = 1, DailyPrice = 100, Description = "test car ", ModelYear = 2002 };
+            //Color testColor = new Color {  Name = "Red" };
+            //Brand testBrand = new Brand { Name = "Opel" };
+            //Customer testCustomer = new Customer {CompanyName = "Test Company" };
+            //User testUser = new User {Email="test@email.com", FirstName="testFN", LastName="testLN", Password="testPass" };
+            //Rental testRental = new Rental {CarId=1, CustomerId=1, RentDate= new DateTime(2021, 10, 24), ReturnDate=default };
+
+
+            //rentalManager.Add(testRental);
+            //customerManager.Add(testCustomer);
+            //userManager.Add(testUser);
             //carManager.Add(testCar);
             //colorManager.Add(testColor);
             //brandManager.Add(testBrand);
@@ -40,40 +57,40 @@ namespace ConsoleUI
             //printBrands(brandManager);
 
 
-         
+
         }
 
-        private static void CarDetailDtoTest(ICarService carManager)
-        {
-            List<CarDetailDto> carDetails = carManager.GetCarDetails();
+        //private static void CarDetailDtoTest(ICarService carManager)
+        //{
+        //    List<CarDetailDto> carDetails = carManager.GetCarDetails();
 
-            foreach (var carDetail in carDetails)
-            {
-                Console.WriteLine("[ CarName: " + carDetail.CarName + "| BrandName:" + carDetail.BrandName + "| ColorName: " + carDetail.ColorName + "| DailyPrice:" + carDetail.DailyPrice + " ]");
+        //    foreach (var carDetail in carDetails)
+        //    {
+        //        Console.WriteLine("[ CarName: " + carDetail.CarName + "| BrandName:" + carDetail.BrandName + "| ColorName: " + carDetail.ColorName + "| DailyPrice:" + carDetail.DailyPrice + " ]");
 
-            }
-        }
+        //    }
+        //}
 
-        private static void printBrands(IBrandService brandManager)
-        {
-            List<Brand> brands = brandManager.GetAll();
+        //private static void printBrands(IBrandService brandManager)
+        //{
+        //    List<Brand> brands = brandManager.GetAll();
 
-            foreach (var brand in brands)
-            {
-                Console.WriteLine("[ Id:" + brand.Id + " | Name:" + brand.Name + " ]");
+        //    foreach (var brand in brands)
+        //    {
+        //        Console.WriteLine("[ Id:" + brand.Id + " | Name:" + brand.Name + " ]");
 
-            }
-        }
+        //    }
+        //}
 
-        private static void printColors(IColorService colorManager)
-        {
-            List<Color> colors = colorManager.GetAll();
+        //private static void printColors(IColorService colorManager)
+        //{
+        //    List<Color> colors = colorManager.GetAll();
 
-            foreach (var color in colors)
-            {
-                Console.WriteLine("[ Id:" + color.Id + "Name: " + color.Name + " ]");
-            }
-        }
+        //    foreach (var color in colors)
+        //    {
+        //        Console.WriteLine("[ Id:" + color.Id + "Name: " + color.Name + " ]");
+        //    }
+        //}
 
         // Print List Objects
         static void printList<T>(List<T> objects)
