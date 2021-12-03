@@ -25,37 +25,30 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {
-            // Try to Login
             var userToLogin = _authService.Login(userForLoginDto);
-            // if login is not succesfull
             if (!userToLogin.Success)
             {
-                // return error message
-                return BadRequest(userToLogin.Message); 
+                return BadRequest(userToLogin.Message);
             }
-            // if login is successfull create a access token
+
             var result = _authService.CreateAccessToken(userToLogin.Data);
-            // is accesss token created succesfully
             if (result.Success)
             {
-                // return access token
                 return Ok(result.Data);
             }
-            // if access token can not created return error message
+
             return BadRequest(result.Message);
         }
 
         [HttpPost("register")]
         public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            // check whether user exists
             var userExists = _authService.UserExists(userForRegisterDto.Email);
-            // if user does not exist
             if (!userExists.Success)
             {
                 return BadRequest(userExists.Message);
             }
-            // if user exist
+
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)

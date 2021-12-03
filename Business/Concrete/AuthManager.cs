@@ -62,9 +62,9 @@ namespace Business.Concrete
 
         public IResult UserExists(string email)
         {
-            if(_userService.GetByMail(email) != null)
+            if(_userService.GetByMail(email).Data != null)
             {
-                return new ErrorResult(">>User already exists");
+                return new ErrorResult(">><<<<<User already exists");
             }
             return new SuccessResult(">>User is not found in DB.");
         }
