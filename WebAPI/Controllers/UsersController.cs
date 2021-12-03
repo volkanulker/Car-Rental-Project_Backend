@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Entities;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,80 +13,60 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AuthController : ControllerBase
     {
-        private IUserService _userService;
+        private IAuthService _authService;
 
-        public UsersController(IUserService userService)
+        public AuthController(IAuthService authService)
         {
-            _userService = userService;
+            _authService = authService;
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(User user)
+        [HttpPost("login")]
+        public ActionResult Login(UserForLoginDto userForLoginDto)
         {
-            var result = _userService.Add(user);
-
+            // Try to Login
+            var userToLogin = _authService.Login(userForLoginDto);
+            // if login is not succesfull
+            if (!userToLogin.Success)
+            {
+                // return error message
+                return BadRequest(userToLogin.Message); 
+            }
+            // if login is successfull create a access token
+            var result = _authService.CreateAccessToken(userToLogin.Data);
+            // is accesss token created succesfully
             if (result.Success)
             {
-                return Ok(result);
+                // return access token
+                return Ok(result.Data);
             }
-
-            return BadRequest(result);
+            // if access token can not created return error message
+            return BadRequest(result.Message);
         }
 
-        [HttpPost("update")]
-        public IActionResult Update(User user)
+        [HttpPost("register")]
+        public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            var result = _userService.Update(user);
-
+            // check whether user exists
+            var userExists = _authService.UserExists(userForRegisterDto.Email);
+            // if user does not exist
+            if (!userExists.Success)
+            {
+                return BadRequest(userExists.Message);
+            }
+            // if user exist
+            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Data);
             }
 
-            return BadRequest(result);
+            return BadRequest(result.Message);
+
         }
 
-
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
-        {
-            var result = _userService.Delete(user);
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var result = _userService.GetAll();
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getuserbyid")]
-        public IActionResult GetUserById(int id)
-        {
-            var result = _userService.GetUserById(id);
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
 
     }
 }

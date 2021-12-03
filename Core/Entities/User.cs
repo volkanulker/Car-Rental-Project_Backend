@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Core.Entities
 {
-    public class User : IEntity
+    public class User: IEntity
     {
         public int Id { get; set; }
 
@@ -17,7 +17,11 @@ namespace Entities.Concrete
 
         public string Email { get; set; }
 
-        public string Password { get; set; }
+        public byte[] PasswordSalt { get; set; }
+
+        public byte[] PasswordHash { get; set; }
+
+        public bool Status { get; set; }
 
 
     }
