@@ -15,7 +15,7 @@ namespace Business.ValidationRules
             // TODO: Add Car Validation Rules
             
             RuleFor(c => c.ModelYear).NotEmpty().WithMessage("Model year can not be empty.");
-            RuleFor(c => c.Name).NotEmpty().WithMessage("Model year can not be empty.");
+            RuleFor(c => c.Model).NotEmpty().WithMessage("Model  can not be empty.");
             // TODO If brandid and colorid deleted fix these codes
             RuleFor(c => c.BrandId).NotEmpty().WithMessage("Brand Id can not be empty.");
             RuleFor(c => c.ColorId).NotEmpty().WithMessage("Color Id can not be empty.");
