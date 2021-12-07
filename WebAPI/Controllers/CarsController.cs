@@ -58,6 +58,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
+        // TODO Authorazation to DB and Controllers 
         //[Authorize()]
 
         public IActionResult GetAll()
