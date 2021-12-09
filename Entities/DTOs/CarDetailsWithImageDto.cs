@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs
 {
-    public class CarDetailDto :IDto
+    public class CarDetailsWithImageDto : IDto
     {
         public int Id { get; set; }
 
@@ -20,7 +20,8 @@ namespace Entities.DTOs
         public int ModelYear { get; set; }
         public int DailyPrice { get; set; }
 
+        public string Description { get; set; }
 
-
+        public string ImagePath { get; set; }
     }
 }

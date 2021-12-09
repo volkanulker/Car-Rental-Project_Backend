@@ -71,5 +71,10 @@ namespace Business.Concrete
         {
                 return new SuccessDataResult<Car>(_carDal.GetAll(c => c.Id == id).First(),">> Car got by ID."); 
         }
+
+        public IDataResult<List<CarDetailsWithImageDto>> GetCarDetailsWithImage(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailsWithImageDto>>(_carDal.GetCarDetailsWithImage(carId), ">> Car detaisl are listed.");
+        }
     }
 }

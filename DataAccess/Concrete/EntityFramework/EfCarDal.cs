@@ -31,10 +31,38 @@ namespace DataAccess.Concrete.EntityFramework
                                  Model = car.Model,
                                  ModelYear = car.ModelYear,
                                  DailyPrice = car.DailyPrice,
-                                 Description = car.Description
+                                 
 
                              };
 
+
+                return result.ToList();
+
+            }
+        }
+        public List<CarDetailsWithImageDto> GetCarDetailsWithImage(int carId)
+        {
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                var result = from car in context.Cars
+                             join color in context.Colors
+                             on car.ColorId equals color.Id
+                             join brand in context.Brands
+                             on car.BrandId equals brand.Id
+                             join carimage in context.CarImages
+                             on car.Id equals carimage.CarId
+                             where car.Id == carId
+                             select new CarDetailsWithImageDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = brand.Name,
+                                 ColorName = color.Name,
+                                 Model = car.Model,
+                                 ModelYear = car.ModelYear,
+                                 DailyPrice = car.DailyPrice,
+                                 Description = car.Description,
+                                 ImagePath = carimage.ImagePath
+                             };
 
                 return result.ToList();
 
