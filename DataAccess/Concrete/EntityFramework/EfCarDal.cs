@@ -31,11 +31,34 @@ namespace DataAccess.Concrete.EntityFramework
                                  Model = car.Model,
                                  ModelYear = car.ModelYear,
                                  DailyPrice = car.DailyPrice,
-                                 
-
                              };
+                return result.ToList();
 
+            }
+        }
 
+        public List<CarDetailDto> GetFilteredCars(int brandId, int colorId, int minDailyPrice, int maxDailyPrice)
+        {
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                var result = from car in context.Cars
+                             join color in context.Colors
+                             on car.ColorId equals color.Id
+                             join brand in context.Brands
+                             on car.BrandId equals brand.Id
+                             where car.BrandId == brandId 
+                             && car.ColorId == colorId
+                             && car.DailyPrice >= minDailyPrice
+                             && car.DailyPrice <= maxDailyPrice
+                             select new CarDetailDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = brand.Name,
+                                 ColorName = color.Name,
+                                 Model = car.Model,
+                                 ModelYear = car.ModelYear,
+                                 DailyPrice = car.DailyPrice,
+                             };
                 return result.ToList();
 
             }

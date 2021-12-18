@@ -76,5 +76,13 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailsWithImageDto>>(_carDal.GetCarDetailsWithImage(carId), ">> Car detaisl are listed.");
         }
+
+        public IDataResult<List<CarDetailDto>> GetFilteredCars(int brandId, int colorId, int minDailyPrice, int maxDailyPrice)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetFilteredCars(brandId, colorId, minDailyPrice, maxDailyPrice),">> Cars are filtered.");
+        }
+
+
+
     }
 }
