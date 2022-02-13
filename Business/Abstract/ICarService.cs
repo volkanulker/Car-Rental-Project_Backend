@@ -11,6 +11,7 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
+        IDataResult<List<CarCardDto>> GetCarCards();
         IDataResult<List<CarDetailDto>> GetCarDetails();
         IDataResult<List<CarDetailsWithImageDto>> GetCarDetailsWithImage(int carId);
         IDataResult<List<Car>> GetCarsByBrandId(int brandId);
@@ -28,5 +29,7 @@ namespace Business.Abstract
         IResult Delete(Car car);
 
         IDataResult<List<CarDetailDto>> GetFilteredCars(int brandId, int colorId, int minDailyPrice, int maxDailyPrice);
+
+        IDataResult<List<CarCardDto>> GetFilteredCarCards(int brandId, int colorId, int minDailyPrice, int maxDailyPrice);
     }
 }

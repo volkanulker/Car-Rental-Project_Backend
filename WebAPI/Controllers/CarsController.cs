@@ -141,6 +141,29 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getcarcards")]
+        public IActionResult GetCarCards()
+        {
+            var result = _carService.GetCarCards();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getfilteredcarcards")]
+        public IActionResult GetFilteredCarCards(int brandId, int colorId, int minDailyPrice, int maxDailyPrice)
+        {
+            var result = _carService.GetFilteredCarCards(brandId, colorId, minDailyPrice, maxDailyPrice);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
 
 
     }

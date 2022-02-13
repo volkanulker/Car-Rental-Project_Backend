@@ -49,14 +49,17 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
+
+            builder.RegisterType<FuelManager>().As<IFuelService>().SingleInstance();
+            builder.RegisterType<EfFuelDal>().As<IFuelDal>().SingleInstance();
+
+            builder.RegisterType<TransmissionManager>().As<ITransmissionService>().SingleInstance();
+            builder.RegisterType<EfTransmissionDal>().As<ITransmissionDal>().SingleInstance();
+
+
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
-
-
-
-
-            // TODO Add All IoC's
 
 
             // Check aspects in code and add interceptor

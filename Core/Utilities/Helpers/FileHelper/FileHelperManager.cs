@@ -13,7 +13,7 @@ namespace Core.Utilities.Helpers.FileHelper
     public class FileHelperManager : IFileHelper
     {
       
-        public void Delete(string filePath)//Buradaki string filePath, 'CarImageManager'dan gelen dosyamın kaydedildiği adres ve adı 
+        public  void Delete(string filePath)//Buradaki string filePath, 'CarImageManager'dan gelen dosyamın kaydedildiği adres ve adı 
         {
             if (File.Exists(filePath))//if kontrolü ile parametrede gelen adreste öyle bir dosya var mı diye kontrol ediliyor.
             {
@@ -21,7 +21,7 @@ namespace Core.Utilities.Helpers.FileHelper
             }
         }
 
-        public string Update(IFormFile file, string filePath, string root)//Dosya güncellemek için ise gelen parametreye baktığımızda Güncellenecek yeni dosya, Eski dosyamızın kayıt dizini, ve yeni bir kayıt dizini
+        public  string Update(IFormFile file, string filePath, string root)//Dosya güncellemek için ise gelen parametreye baktığımızda Güncellenecek yeni dosya, Eski dosyamızın kayıt dizini, ve yeni bir kayıt dizini
         {
             if (File.Exists(filePath))// Tekrar if kontrolü ile parametrede gelen adreste öyle bir dosya var mı diye kontrol ediliyor.
             {
@@ -30,7 +30,7 @@ namespace Core.Utilities.Helpers.FileHelper
             return Upload(file, root);// Eski dosya silindikten sonra yerine geçecek yeni dosyaiçin alttaki *Upload* metoduna yeni dosya ve kayıt edileceği adres parametre olarak döndürülüyor.
         }
 
-        public string Upload(IFormFile file, string root)
+        public  string Upload(IFormFile file, string root)
         {
             if (file.Length > 0)//file.Length=>Dosya uzunluğunu bayt olarak alır. burada Dosya gönderil mi gönderilmemiş diye test işlemi yapıldı.
             {

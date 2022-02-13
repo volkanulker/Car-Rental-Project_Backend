@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             this._paymentService = paymentService;
         }
 
-        [HttpGet("checkPaymentInfo")]
+        [HttpPost("checkPaymentInfo")]
 
         public IActionResult CheckPaymentInfo(CreditCard creditCard)
         {

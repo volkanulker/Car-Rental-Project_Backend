@@ -11,7 +11,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class CarRentalDBContext:DbContext
     {
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-87K40S0\SQLEXPRESS;Database=CarRentalDB;Trusted_Connection=true");
@@ -35,6 +34,9 @@ namespace DataAccess.Concrete.EntityFramework
 
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
+        public DbSet<Fuel> Fuels { get; set; }
+
+        public DbSet<Transmission> Transmissions { get; set; }
 
     }
 }

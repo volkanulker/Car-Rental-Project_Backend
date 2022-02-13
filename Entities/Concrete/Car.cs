@@ -21,6 +21,12 @@ namespace Entities.Concrete
         public int DailyPrice { get; set; }
         public string Description { get; set; }
 
+        public int FuelId { get; set; }
+
+        public int NumberOfSeats { get; set; }
+
+        public int TransmissionId { get; set; }
+
         override
         public string ToString()
         {

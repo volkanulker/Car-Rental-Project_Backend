@@ -94,5 +94,20 @@ namespace Business.Concrete
             }
             return new ErrorResult();
         }
+
+        public IResult DeleteAllImagesOfCarByCarId(int carId)
+        {
+            var deletedImages = _carImageDal.GetAll(c => c.CarId == carId);
+            if (deletedImages == null)
+            {
+                return new ErrorResult("No picture of the car");
+            }
+            foreach (var deletedImage in deletedImages)
+            {
+                _carImageDal.Delete(deletedImage);
+                _fileHelper.Delete(deletedImage.ImagePath);
+            }
+            return new SuccessResult(">>Car image is deleted.");
+        }
     }
 }
